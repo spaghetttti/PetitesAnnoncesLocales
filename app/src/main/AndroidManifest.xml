@@ -22,6 +22,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="true"
+            android:label="@string/register_form">
+
+        </activity>
+
+        <activity
+            android:name=".SignInActivity"
+            android:exported="true"
+            android:label="@string/signin_form">
+
+        </activity>
     </application>
 
 </manifest>

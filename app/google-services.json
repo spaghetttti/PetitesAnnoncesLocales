@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "776427165878",
+    "project_id": "lespetitesannonces-307c9",
+    "storage_bucket": "lespetitesannonces-307c9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776427165878:android:a2f76ff20af84e47616e17",
+        "android_client_info": {
+          "package_name": "com.example.petitesannonceslocales"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAE2V1voZIXAw528j2Ef-dNThTnO3D--UA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

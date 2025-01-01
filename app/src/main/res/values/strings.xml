@@ -2,5 +2,11 @@
     <string name="app_name">Petites Annonces Locales</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_account">Account</string>
+    <string-array name="profile_types">
+        <item>Individual</item>
+        <item>Professional</item>
+    </string-array>
+    <string name="register_form">Register Form</string>
+    <string name="signin_form">Sign in Form</string>
 </resources>
