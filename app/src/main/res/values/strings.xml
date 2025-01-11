@@ -9,4 +9,14 @@
     </string-array>
     <string name="register_form">Register Form</string>
     <string name="signin_form">Sign in Form</string>
+    <string name="post_ad_form">Post Ad Form</string>
+    <string-array name="categories_array">
+        <item>Electronics</item>
+        <item>Fashion</item>
+        <item>Books &amp; Media</item>
+        <item>Automotive</item>
+        <item>Sports &amp; Outdoors</item>
+        <item>Pets</item>
+        <item>Health &amp; Beauty</item>
+    </string-array>
 </resources>

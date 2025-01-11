@@ -3,14 +3,14 @@
 ## Tasks for Asil
 ### For Ad Posters
 1. **User Registration:**
-   - [ ] Implement Firebase Authentication for email/password registration.
-   - [ ] Differentiate between Individual and Professional profiles.
-   - [ ] Create registration forms tailored to each user profile.
+   - [x] Implement Firebase Authentication for email/password registration.
+   - [x] Differentiate between Individual and Professional profiles.
+   - [x] Create registration forms tailored to each user profile.
 
 2. **Post an Ad:**
-   - [ ] Implement guided selection of product categories.
-   - [ ] Create a form for product-specific details (title, description, images).
-   - [ ] Add functionality to select a preferred contact method.
+   - [x] Implement guided selection of product categories.
+   - [x] Create a form for product-specific details (title, description, images).
+   - [x] Add functionality to select a preferred contact method.
 
 3. **Manage Posted Ads:**
    - [ ] Implement viewing of posted ads.
