@@ -80,9 +80,16 @@
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"/>
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <!-- Button -->
+    <Button
+        android:id="@+id/adManager"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Ads Manager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/postAd"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

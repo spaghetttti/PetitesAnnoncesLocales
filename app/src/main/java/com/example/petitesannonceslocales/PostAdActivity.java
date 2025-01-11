@@ -17,6 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.petitesannonceslocales.utils.SessionManager;
+import com.example.petitesannonceslocales.utils.User;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -30,6 +32,8 @@ public class PostAdActivity extends AppCompatActivity {
     private ImageView imageViewPreview;
     private RadioGroup radioGroupContact;
     private Uri selectedImageUri;
+    private User currentUser ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,14 @@ public class PostAdActivity extends AppCompatActivity {
 
         // Submit Button
         buttonSubmitAd.setOnClickListener(v -> submitAd());
+
+        SessionManager.getInstance().getCurrentUserLiveData().observe(this,user -> {
+            if (user != null) {
+                currentUser = user;
+            } else {
+                Toast.makeText(this, "No active user session", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void openImagePicker() {
@@ -95,6 +107,7 @@ public class PostAdActivity extends AppCompatActivity {
         // Save to Firebase Firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String, Object> ad = new HashMap<>();
+        ad.put("userEmail", currentUser.getEmail());
         ad.put("category", category);
         ad.put("title", title);
         ad.put("description", description);

@@ -41,6 +41,12 @@
             android:name=".PostAdActivity"
             android:exported="true"
             android:label="@string/post_ad_form">
+        </activity>
+
+        <activity
+            android:name=".AdManagerActivity"
+            android:exported="true"
+            android:label="@string/ads_manager">
 
         </activity>
     </application>

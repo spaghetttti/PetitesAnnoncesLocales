@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 
+import com.example.petitesannonceslocales.AdManagerActivity;
 import com.example.petitesannonceslocales.PostAdActivity;
 import com.example.petitesannonceslocales.R;
 import com.example.petitesannonceslocales.RegisterActivity;
@@ -28,6 +29,7 @@ public class AccountFragment extends Fragment {
     private Button actionButton;
     private Button signinButton;
     private Button postAdButton;
+    private Button adManagerButton;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class AccountFragment extends Fragment {
         actionButton = view.findViewById(R.id.actionButton);
         signinButton = view.findViewById(R.id.signinButton);
         postAdButton = view.findViewById(R.id.postAd);
+        adManagerButton = view.findViewById(R.id.adManager);
 
         viewModel = new ViewModelProvider(this).get(AccountViewModel.class);
 
@@ -65,11 +68,18 @@ public class AccountFragment extends Fragment {
             Intent intent = new Intent(getActivity(), PostAdActivity.class);
             startActivity(intent);
         });
+
+        adManagerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), AdManagerActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void observeViewModel() {
         viewModel.getCurrentUser().observe(getViewLifecycleOwner(), user -> {
             postAdButton.setVisibility(View.GONE);
+            adManagerButton.setVisibility(View.GONE);
+
             if (user != null) {
                 Log.wtf("user:", user.getEmail());
                 emailTextView.setText(user.getEmail());
@@ -78,6 +88,7 @@ public class AccountFragment extends Fragment {
                 signinButton.setVisibility(View.GONE);
                 if (Objects.equals(user.getUserType(), "Professional")) {
                     postAdButton.setVisibility(View.VISIBLE);
+                    adManagerButton.setVisibility(View.VISIBLE);
                 }
             } else {
                 emailTextView.setText("");

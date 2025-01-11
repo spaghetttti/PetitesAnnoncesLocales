@@ -10,6 +10,8 @@
     <string name="register_form">Register Form</string>
     <string name="signin_form">Sign in Form</string>
     <string name="post_ad_form">Post Ad Form</string>
+    <string name="ad_image">Product image</string>
+    <string name="ads_manager">Ads Manager</string>
     <string-array name="categories_array">
         <item>Electronics</item>
         <item>Fashion</item>
