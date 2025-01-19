@@ -7,6 +7,14 @@
     android:padding="16dp"
     android:background="@android:color/white">
 
+    <Button
+        android:id="@+id/buttonRefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Refresh"
+        android:layout_margin="16dp"
+        android:layout_gravity="center_horizontal" />
+
     <TextView
         android:id="@+id/textViewHeader"
         android:layout_width="match_parent"

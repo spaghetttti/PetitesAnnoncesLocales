@@ -55,8 +55,39 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginStart="8dp"
             android:text="Delete"
             android:backgroundTint="@color/design_default_color_error"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+    <!-- Buttons Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <!-- Like Button -->
+        <Button
+            android:id="@+id/buttonLike"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/design_default_color_primary"
+            android:text="Like"
+            android:textColor="@android:color/white" />
+
+        <!-- Contact Button -->
+        <Button
+            android:id="@+id/buttonContact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="2"
+            android:backgroundTint="@color/design_default_color_primary"
+            android:text="Contact"
             android:textColor="@android:color/white" />
     </LinearLayout>
 </LinearLayout>

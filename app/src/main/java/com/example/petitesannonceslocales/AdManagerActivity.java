@@ -2,6 +2,7 @@ package com.example.petitesannonceslocales;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -41,6 +42,17 @@ public class AdManagerActivity extends AppCompatActivity {
             }
 
             @Override
+            public void onAdLike(Ad ad) {
+                // Handle ad selection if needed
+
+            }
+
+            @Override
+            public void onAdContact(Ad ad) {
+                // Handle ad selection if needed
+            }
+
+            @Override
             public void onAdEdit(Ad ad) {
                 Intent intent = new Intent(AdManagerActivity.this, EditAdActivity.class);
                 intent.putExtra("ad_id", ad.getId());
@@ -71,7 +83,7 @@ public class AdManagerActivity extends AppCompatActivity {
                         .setNegativeButton("No", null)
                         .show();
             }
-        });
+        }, AdAdapter.Mode.MANAGE_VIEW);
 
         recyclerViewAds.setAdapter(adAdapter);
 
@@ -82,6 +94,19 @@ public class AdManagerActivity extends AppCompatActivity {
                 Toast.makeText(this, "No active user session", Toast.LENGTH_SHORT).show();
                 finish();
             }
+        });
+
+        Button refreshButton = findViewById(R.id.buttonRefresh);
+
+        refreshButton.setOnClickListener(v -> {
+            // Re-fetch the data manually
+            SessionManager.getInstance().getCurrentUserLiveData().observe(this, user -> {
+                if (user != null) {
+                    fetchUserAds(user.getEmail());
+                } else {
+                    Toast.makeText(this, "No active user session", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 

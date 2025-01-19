@@ -56,6 +56,13 @@
             android:label="@string/edit_ad">
 
         </activity>
+
+        <activity
+            android:name=".LikedAdsActivity"
+            android:exported="true"
+            android:label="@string/title_likedlist">
+
+        </activity>
     </application>
 
 </manifest>

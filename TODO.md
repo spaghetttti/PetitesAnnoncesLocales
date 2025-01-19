@@ -41,26 +41,27 @@
    - [ ] Develop a detailed view for ads.
 
 4. **Interactions:**
-   - [ ] Implement functionality to contact ad posters.
-   - [ ] Enable saving ads for future reference.
+   - [x] Implement functionality to contact ad posters.
    - [ ] Add functionality to report fraudulent or scam ads.
-   - [ ] Enable users to like ads.
+   - [x] Enable users to like ads.
 
 5. **Saved Ads:**
-   - [ ] Create a list view for saved ads.
+   - [x] Create a list view for liked ads.
 
 ---
 
 ### Shared Tasks
 1. **Project Setup:**
-   - [ ] Integrate Firebase Authentication and Realtime Database.
-   - [ ] Set up project structure in Android Studio.
-   - [ ] Ensure seamless synchronization for shared development.
+   - [x] Integrate Firebase Authentication and Realtime Database.
+   - [x] Set up project structure in Android Studio.
+   - [x] Ensure seamless synchronization for shared development.
 
 2. **Testing and Debugging:**
-   - [ ] Test all implemented features.
-   - [ ] Debug and fix any identified issues.
+   - [x] Test all implemented features.
+   - [x] Debug and fix any identified issues.
 
 3. **UI/UX Design:**
-   - [ ] Collaborate on app navigation and layout design.
-   - [ ] Ensure consistent styling for all screens.
+   - [x] Collaborate on app navigation and layout design.
+   - [x] Ensure consistent styling for all screens.
+4. **Refresh Button**
+   - [ ] button for refreshing the app from latest db data

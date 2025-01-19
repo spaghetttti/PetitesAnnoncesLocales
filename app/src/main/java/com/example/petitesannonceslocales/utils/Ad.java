@@ -8,11 +8,11 @@ public class Ad {
     private String contactMethod;
     private String imageUri;
     private String userId; // ID of the user who posted the ad
-
+    private  String contactInfo;
     // Empty constructor required for Firestore
     public Ad() {}
 
-    public Ad(String id, String category, String title, String description, String contactMethod, String imageUri, String userId) {
+    public Ad(String id, String category, String title, String description, String contactMethod, String imageUri, String userId, String contactInfo) {
         this.id = id;
         this.category = category;
         this.title = title;
@@ -20,6 +20,7 @@ public class Ad {
         this.contactMethod = contactMethod;
         this.imageUri = imageUri;
         this.userId = userId;
+        this.contactInfo = contactInfo;
     }
 
     // Getters and setters
@@ -37,6 +38,9 @@ public class Ad {
     public void setImageUri(String imageUri) { this.imageUri = imageUri; }
     public String getUserId() { return userId; }
     public void setUserId(String userId) { this.userId = userId; }
+    public String getContactInfo() { return contactInfo; }
+    public void setContactInfo(String contactInfo) { this.contactInfo = contactInfo; }
+
     @Override
     public String toString() {
         return "Ad{" +
@@ -47,6 +51,7 @@ public class Ad {
                 ", contactMethod='" + contactMethod + '\'' +
                 ", imageUri='" + imageUri + '\'' +
                 ", userId='" + userId + '\'' +
+                ", contactInfo='" + contactInfo + '\'' +
                 '}';
     }
 }

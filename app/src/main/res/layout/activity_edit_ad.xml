@@ -29,6 +29,12 @@
         android:layout_height="wrap_content"
         android:hint="Contact Method" />
 
+    <EditText
+        android:id="@+id/editTextContactInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contact Info" />
+
     <Button
         android:id="@+id/buttonSaveChanges"
         android:layout_width="match_parent"

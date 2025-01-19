@@ -15,7 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class EditAdActivity extends AppCompatActivity {
 
-    private EditText editTextTitle, editTextDescription, editTextContactMethod;
+    private EditText editTextTitle, editTextDescription, editTextContactMethod, editTextContactInfo;
     private Spinner spinnerCategory;
     private Button buttonSaveChanges;
     private String adId;
@@ -28,6 +28,7 @@ public class EditAdActivity extends AppCompatActivity {
         editTextTitle = findViewById(R.id.editTextTitle);
         editTextDescription = findViewById(R.id.editTextDescription);
         editTextContactMethod = findViewById(R.id.editTextContactMethod);
+        editTextContactInfo = findViewById(R.id.editTextContactInfo);
         spinnerCategory = findViewById(R.id.spinnerCategory);
         buttonSaveChanges = findViewById(R.id.buttonSaveChanges);
 
@@ -37,11 +38,13 @@ public class EditAdActivity extends AppCompatActivity {
         String description = getIntent().getStringExtra("description");
         String category = getIntent().getStringExtra("category");
         String contactMethod = getIntent().getStringExtra("contactMethod");
+        String contactInfo = getIntent().getStringExtra("contactInfo");
 
         // Populate fields
         editTextTitle.setText(title);
         editTextDescription.setText(description);
         editTextContactMethod.setText(contactMethod);
+        editTextContactInfo.setText(contactInfo);
         // TODO: Set spinnerCategory to the correct value
         // Populate Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -62,7 +65,8 @@ public class EditAdActivity extends AppCompatActivity {
                             "title", editTextTitle.getText().toString(),
                             "description", editTextDescription.getText().toString(),
                             "category", spinnerCategory.getSelectedItem().toString(),
-                            "contactMethod", editTextContactMethod.getText().toString()
+                            "contactMethod", editTextContactMethod.getText().toString(),
+                            "contactInfo", editTextContactInfo.getText().toString()
                     )
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(EditAdActivity.this, "Ad updated successfully.", Toast.LENGTH_SHORT).show();

@@ -13,6 +13,7 @@
     <string name="ad_image">Product image</string>
     <string name="ads_manager">Ads Manager</string>
     <string name="edit_ad">Edit Ad</string>
+    <string name="title_likedlist">Liked List</string>
     <string-array name="categories_array">
         <item>Electronics</item>
         <item>Fashion</item>

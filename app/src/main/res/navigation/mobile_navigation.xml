@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.petitesannonceslocales.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_likedlist"
+        android:name="com.example.petitesannonceslocales.ui.liked.LikedListFragment"
+        android:label="Liked Ads"
+        tools:layout="@layout/fragment_liked_list" />
 
     <fragment
         android:id="@+id/navigation_account"
