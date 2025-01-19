@@ -17,23 +17,21 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.example.petitesannonceslocales.utils.SessionManager;
 import com.example.petitesannonceslocales.utils.User;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-
 public class PostAdActivity extends AppCompatActivity {
 
     private Spinner spinnerCategory;
-    private EditText editTextTitle, editTextDescription, editTextContactInfo;
-    private Button buttonUploadImage, buttonSubmitAd;
+    private EditText editTextTitle, editTextDescription, editTextContactInfo, editTextImageUrl, editTextPrice;
+    private Button buttonSubmitAd;
     private ImageView imageViewPreview;
     private RadioGroup radioGroupContact;
-    private Uri selectedImageUri;
-    private User currentUser ;
-
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +42,8 @@ public class PostAdActivity extends AppCompatActivity {
         spinnerCategory = findViewById(R.id.spinnerCategory);
         editTextTitle = findViewById(R.id.editTextTitle);
         editTextDescription = findViewById(R.id.editTextDescription);
-        buttonUploadImage = findViewById(R.id.buttonUploadImage);
+        editTextPrice = findViewById(R.id.editTextPrice);
+        editTextImageUrl = findViewById(R.id.editTextImageUrl); // New input for image URL
         imageViewPreview = findViewById(R.id.imageViewPreview);
         radioGroupContact = findViewById(R.id.radioGroupContact);
         editTextContactInfo = findViewById(R.id.contactValue);
@@ -59,13 +58,17 @@ public class PostAdActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategory.setAdapter(adapter);
 
-        // Image Upload
-        buttonUploadImage.setOnClickListener(v -> openImagePicker());
+        // Add a listener to the image URL field to update the preview
+        editTextImageUrl.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) { // When the user finishes editing
+                updateImagePreview(editTextImageUrl.getText().toString().trim());
+            }
+        });
 
         // Submit Button
         buttonSubmitAd.setOnClickListener(v -> submitAd());
 
-        SessionManager.getInstance().getCurrentUserLiveData().observe(this,user -> {
+        SessionManager.getInstance().getCurrentUserLiveData().observe(this, user -> {
             if (user != null) {
                 currentUser = user;
             } else {
@@ -74,18 +77,16 @@ public class PostAdActivity extends AppCompatActivity {
         });
     }
 
-    private void openImagePicker() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, 101);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 101 && resultCode == RESULT_OK && data != null) {
-            selectedImageUri = data.getData();
-            imageViewPreview.setImageURI(selectedImageUri);
+    private void updateImagePreview(String imageUrl) {
+        if (imageUrl.isEmpty()) {
+            imageViewPreview.setVisibility(View.GONE);
+        } else {
             imageViewPreview.setVisibility(View.VISIBLE);
+            Glide.with(this)
+                    .load(imageUrl) // Use Glide to load the image from the URL
+                    .placeholder(R.drawable.placeholder_image) // Optional placeholder
+                    .error(R.drawable.placeholder_image) // Optional error image
+                    .into(imageViewPreview);
         }
     }
 
@@ -94,11 +95,13 @@ public class PostAdActivity extends AppCompatActivity {
         String title = editTextTitle.getText().toString().trim();
         String description = editTextDescription.getText().toString().trim();
         String contactInfo = editTextContactInfo.getText().toString().trim();
+        String imageUrl = editTextImageUrl.getText().toString().trim();
+        String price = editTextPrice.getText().toString().trim();
 
         int selectedContactMethodId = radioGroupContact.getCheckedRadioButtonId();
         String contactMethod = selectedContactMethodId == R.id.radioEmail ? "Email" : "Phone";
 
-        if (title.isEmpty() || description.isEmpty() || contactInfo.isEmpty()) {
+        if (title.isEmpty() || price.isEmpty() || description.isEmpty() || contactInfo.isEmpty() || imageUrl.isEmpty()) {
             Log.w("SubmitAd", "Validation failed: One or more fields are empty.");
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
@@ -112,9 +115,9 @@ public class PostAdActivity extends AppCompatActivity {
         ad.put("title", title);
         ad.put("description", description);
         ad.put("contactMethod", contactMethod);
-        ad.put("imageUri", selectedImageUri != null ? selectedImageUri.toString() : "No Image");
+        ad.put("imageUri", imageUrl); // Save the public URL
         ad.put("contactInfo", contactInfo);
-
+        ad.put("price", price);
 
         db.collection("ads")
                 .add(ad)
@@ -128,4 +131,5 @@ public class PostAdActivity extends AppCompatActivity {
                 });
     }
 }
+
 

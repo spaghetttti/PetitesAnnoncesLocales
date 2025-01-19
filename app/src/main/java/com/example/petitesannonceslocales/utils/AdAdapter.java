@@ -65,6 +65,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
 
         holder.titleTextView.setText(ad.getTitle());
         holder.descriptionTextView.setText(ad.getDescription());
+        holder.priceTextView.setText("€" + ad.getPrice());
         Glide.with(context).load(ad.getImageUri()).into(holder.imageView);
 
         // Adjust UI and actions based on mode
@@ -118,7 +119,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
     }
 
     public static class AdViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTextView, descriptionTextView;
+        TextView titleTextView, descriptionTextView, priceTextView;
         ImageView imageView;
         Button editButton, deleteButton, likeButton, contactButton;
 
@@ -131,6 +132,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
             deleteButton = itemView.findViewById(R.id.buttonDelete);
             likeButton = itemView.findViewById(R.id.buttonLike);
             contactButton = itemView.findViewById(R.id.buttonContact);
+            priceTextView = itemView.findViewById(R.id.textViewPrice);
 
         }
     }

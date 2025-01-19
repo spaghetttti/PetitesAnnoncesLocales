@@ -17,12 +17,10 @@
    - [x] Add functionality to modify ads.
    - [x] Add functionality to delete ads.
 
-4. **Message Center:**
-   - [ ] Develop a message center for viewing messages related to ads.
-   - [ ] Enable interaction with interested users.
+4. **Contact Center:**
+   - [x] Enable interaction with interested users by email or phone-number.
 
 5. **Professional Advertiser Features:**
-   - [ ] Add functionality for higher image limits for Professional users.
    - [ ] Display number of views/likes for ads.
 
 ---
@@ -33,16 +31,11 @@
    - [x] Implement a feature to display the most recent ads.
 
 2. **Search for Ads:**
-   - [ ] Add filtering functionality by location (city/department).
-   - [ ] Implement guided selection of product categories.
-   - [ ] Add basic category-specific filters for search.
-
-3. **Ad Details:**
-   - [ ] Develop a detailed view for ads.
+   - [x] Add filtering functionality by category.
+   - [x] Add basic category-specific filters for search.
 
 4. **Interactions:**
    - [x] Implement functionality to contact ad posters.
-   - [ ] Add functionality to report fraudulent or scam ads.
    - [x] Enable users to like ads.
 
 5. **Saved Ads:**
@@ -64,4 +57,4 @@
    - [x] Collaborate on app navigation and layout design.
    - [x] Ensure consistent styling for all screens.
 4. **Refresh Button**
-   - [ ] button for refreshing the app from latest db data
+   - [x] button for refreshing the app from latest db data

@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.petitesannonceslocales.R;
 import com.example.petitesannonceslocales.databinding.FragmentHomeBinding;
 import com.example.petitesannonceslocales.utils.Ad;
 import com.example.petitesannonceslocales.utils.AdAdapter;
@@ -104,13 +105,6 @@ public class HomeFragment extends Fragment {
 
         recyclerViewAds.setAdapter(adAdapter);
 
-//        // Fetch all ads from Firestore and observe data changes
-//        homeViewModel.getAllAds().observe(getViewLifecycleOwner(), ads -> {
-//            adList.clear();
-//            adList.addAll(ads);
-//            adAdapter.notifyDataSetChanged();
-//        });
-
         db = FirebaseFirestore.getInstance();
 
         loadAds();
@@ -154,7 +148,16 @@ public class HomeFragment extends Fragment {
     }
 
     private void setupCategorySpinner() {
-        String[] categories = {"All", "Electronics", "Furniture", "Vehicles", "Jobs"};
+//        String[] categories = {"All", "Electronics", "Furniture", "Vehicles", "Jobs"};
+        // Get the string array from resources
+        String[] allCategories = getResources().getStringArray(R.array.categories_array);
+
+        // Create a new array with "All" as the first element
+        String[] categories = new String[allCategories.length + 1];
+        categories[0] = "All";
+
+        // Copy the elements from the resource array to the new array
+        System.arraycopy(allCategories, 0, categories, 1, allCategories.length);
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(requireContext(),
                 android.R.layout.simple_spinner_dropdown_item, categories);
         binding.spinnerCategory.setAdapter(spinnerAdapter);

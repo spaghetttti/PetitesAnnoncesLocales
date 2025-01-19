@@ -23,6 +23,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
+    <!-- Image Upload -->
+    <EditText
+        android:id="@+id/editTextImageUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Image URL" />
+
+    <ImageView
+        android:id="@+id/imageViewPreview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="8dp" />
+
     <EditText
         android:id="@+id/editTextContactMethod"
         android:layout_width="match_parent"
@@ -34,6 +50,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contact Info" />
+
+    <EditText
+        android:id="@+id/editTextPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Price in Euros"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/buttonSaveChanges"
