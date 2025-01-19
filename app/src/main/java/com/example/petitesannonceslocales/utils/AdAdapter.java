@@ -95,7 +95,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
                 Toast.makeText(context, "Ad Liked!", Toast.LENGTH_SHORT).show();
             });
 
-//            holder.likeButton.setOnClickListener(v -> listener.onAdLike(ad));
+            // holder.likeButton.setOnClickListener(v -> listener.onAdLike(ad));
             holder.contactButton.setOnClickListener(v -> listener.onAdContact(ad));
         } else if (mode == Mode.MANAGE_VIEW) {
             holder.likeButton.setVisibility(View.GONE);

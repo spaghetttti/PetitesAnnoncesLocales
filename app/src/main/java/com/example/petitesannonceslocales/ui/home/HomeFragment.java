@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.petitesannonceslocales.databinding.FragmentHomeBinding;
 import com.example.petitesannonceslocales.utils.Ad;
 import com.example.petitesannonceslocales.utils.AdAdapter;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +35,9 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private RecyclerView recyclerViewAds;
     private AdAdapter adAdapter;
-    private List<Ad> adList;
+    private List<Ad> allAds = new ArrayList<>();
+    private List<Ad> filteredAds = new ArrayList<>();
+    private FirebaseFirestore db;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,8 +49,8 @@ public class HomeFragment extends Fragment {
         recyclerViewAds = binding.recyclerViewAds; // Ensure you have a RecyclerView in your layout with this ID
         recyclerViewAds.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        adList = new ArrayList<>();
-        adAdapter = new AdAdapter(requireContext(), adList, new AdAdapter.AdActionListener() {
+        allAds = new ArrayList<>();
+        adAdapter = new AdAdapter(requireContext(), filteredAds, new AdAdapter.AdActionListener() {
             @Override
             public void onAdSelected(Ad ad) {
                 // Handle ad selection
@@ -97,16 +104,93 @@ public class HomeFragment extends Fragment {
 
         recyclerViewAds.setAdapter(adAdapter);
 
-        // Fetch all ads from Firestore and observe data changes
-        homeViewModel.getAllAds().observe(getViewLifecycleOwner(), ads -> {
-            Log.d("ads from model:", ads.toString());
-            adList.clear();
-            adList.addAll(ads);
-            adAdapter.notifyDataSetChanged();
-        });
-        Log.d("ads in fragment:", adList.toString());
+//        // Fetch all ads from Firestore and observe data changes
+//        homeViewModel.getAllAds().observe(getViewLifecycleOwner(), ads -> {
+//            adList.clear();
+//            adList.addAll(ads);
+//            adAdapter.notifyDataSetChanged();
+//        });
+
+        db = FirebaseFirestore.getInstance();
+
+        loadAds();
+        setupSearchView();
+        setupCategorySpinner();
         return root;
     }
+
+    private void loadAds() {
+        db.collection("ads").get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    allAds.clear();
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        Ad ad = document.toObject(Ad.class);
+                        ad.setId(document.getId());
+                        allAds.add(ad);
+                    }
+                    filteredAds.clear();
+                    filteredAds.addAll(allAds);
+                    adAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(requireContext(), "Failed to load ads", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void setupSearchView() {
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                filterAds(query, getSelectedCategory());
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterAds(newText, getSelectedCategory());
+                return true;
+            }
+        });
+    }
+
+    private void setupCategorySpinner() {
+        String[] categories = {"All", "Electronics", "Furniture", "Vehicles", "Jobs"};
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(requireContext(),
+                android.R.layout.simple_spinner_dropdown_item, categories);
+        binding.spinnerCategory.setAdapter(spinnerAdapter);
+
+        binding.spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                filterAds(binding.searchView.getQuery().toString(), categories[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
+    }
+
+    private String getSelectedCategory() {
+        return binding.spinnerCategory.getSelectedItem().toString();
+    }
+
+    private void filterAds(String query, String category) {
+        filteredAds.clear();
+
+        for (Ad ad : allAds) {
+            boolean matchesQuery = query.isEmpty() || ad.getTitle().toLowerCase().contains(query.toLowerCase());
+            boolean matchesCategory = category.equals("All") || ad.getCategory().equals(category);
+
+            if (matchesQuery && matchesCategory) {
+                filteredAds.add(ad);
+            }
+        }
+
+        adAdapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public void onDestroyView() {
