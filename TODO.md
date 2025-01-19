@@ -13,9 +13,9 @@
    - [x] Add functionality to select a preferred contact method.
 
 3. **Manage Posted Ads:**
-   - [ ] Implement viewing of posted ads.
-   - [ ] Add functionality to modify ads.
-   - [ ] Add functionality to delete ads.
+   - [x] Implement viewing of posted ads.
+   - [x] Add functionality to modify ads.
+   - [x] Add functionality to delete ads.
 
 4. **Message Center:**
    - [ ] Develop a message center for viewing messages related to ads.
@@ -30,7 +30,7 @@
 ## Tasks for William
 ### For Ad Viewers
 1. **Default Display:**
-   - [ ] Implement a feature to display the most recent ads.
+   - [x] Implement a feature to display the most recent ads.
 
 2. **Search for Ads:**
    - [ ] Add filtering functionality by location (city/department).

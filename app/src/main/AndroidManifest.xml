@@ -49,6 +49,13 @@
             android:label="@string/ads_manager">
 
         </activity>
+
+        <activity
+            android:name=".EditAdActivity"
+            android:exported="true"
+            android:label="@string/edit_ad">
+
+        </activity>
     </application>
 
 </manifest>

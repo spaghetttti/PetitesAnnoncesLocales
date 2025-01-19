@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.petitesannonceslocales.R;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
     private AdActionListener listener;
 
     public AdAdapter(List<Ad> adList) {
+        this.adList = adList;
     }
 
     public AdAdapter(Context context, List<Ad> adList, AdActionListener listener) {
@@ -31,13 +33,16 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
 
     public interface AdActionListener {
         void onAdSelected(Ad ad);
-        void onAdModify(Ad ad);
+        void onAdEdit(Ad ad);
         void onAdDelete(Ad ad);
     }
 
     @NonNull
     @Override
     public AdViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (context == null) {
+            context = parent.getContext(); // Dynamically set context if it's null
+        }
         View view = LayoutInflater.from(context).inflate(R.layout.item_ad, parent, false);
         return new AdViewHolder(view);
     }
@@ -47,11 +52,10 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
         Ad ad = adList.get(position);
         holder.titleTextView.setText(ad.getTitle());
         holder.descriptionTextView.setText(ad.getDescription());
-//        Glide.with(context).load(ad.getImageUri()).into(holder.imageView);
+        Glide.with(context).load(ad.getImageUri()).into(holder.imageView);
 
         holder.itemView.setOnClickListener(v -> listener.onAdSelected(ad));
-
-        holder.modifyButton.setOnClickListener(v -> listener.onAdModify(ad));
+        holder.editButton.setOnClickListener(v -> listener.onAdEdit(ad));
         holder.deleteButton.setOnClickListener(v -> listener.onAdDelete(ad));
     }
 
@@ -66,14 +70,14 @@ public class AdAdapter extends RecyclerView.Adapter<AdAdapter.AdViewHolder> {
     public static class AdViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView, descriptionTextView;
         ImageView imageView;
-        Button modifyButton, deleteButton;
+        Button editButton, deleteButton;
 
         public AdViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.textViewTitle);
             descriptionTextView = itemView.findViewById(R.id.textViewDescription);
             imageView = itemView.findViewById(R.id.imageViewAd);
-            modifyButton = itemView.findViewById(R.id.buttonModify);
+            editButton = itemView.findViewById(R.id.buttonModify);
             deleteButton = itemView.findViewById(R.id.buttonDelete);
         }
     }

@@ -12,6 +12,7 @@
     <string name="post_ad_form">Post Ad Form</string>
     <string name="ad_image">Product image</string>
     <string name="ads_manager">Ads Manager</string>
+    <string name="edit_ad">Edit Ad</string>
     <string-array name="categories_array">
         <item>Electronics</item>
         <item>Fashion</item>
